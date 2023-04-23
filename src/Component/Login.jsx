@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './Providers/AuthProvider';
+import { Button } from 'flowbite-react';
 
 const Login = () => {
 
-  const { signIn } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
 
   const handleLogIn = (event) => {
     event.preventDefault();
@@ -22,6 +23,17 @@ const Login = () => {
       })
 
   }
+
+ const handleGoogle =()=>[
+  signInWithGoogle()
+  .then(result=>{
+    const loggedUser = result.user
+    console.log(loggedUser)
+  })
+  .catch(error=>{
+    console.log(error)
+  })
+ ]
   return (
 
     <div>
@@ -53,7 +65,12 @@ const Login = () => {
               </div>
             </form>
             <p className='pl-5'>New to Auth master!<Link to='/register'><button className='btn btn-link'>Register Now</button></Link></p>
+          <div>
+            <Button className='w-full' onClick={handleGoogle}>SignIn With Google</Button>
+            
           </div>
+          </div>
+
         </div>
       </div>
     </div>
