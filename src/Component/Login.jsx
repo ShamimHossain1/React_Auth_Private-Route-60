@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './Providers/AuthProvider';
 
 const Login = () => {
 
-  const handleLogIn=(event)=>{
+  const { signIn } = useContext(AuthContext);
+
+  const handleLogIn = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-
-    console.log(email, password);
+    signIn(email, password)
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        form.reset();
+      })
+      .catch(error => {
+        console.error(error);
+      })
 
   }
   return (
-    
+
     <div>
       <div className="hero lg:pb-72 lg:pt-40 bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
