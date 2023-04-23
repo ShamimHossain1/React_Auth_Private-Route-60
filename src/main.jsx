@@ -13,6 +13,7 @@ import AuthProvider from './Component/Providers/AuthProvider';
 import Orders from './Component/Orders';
 import PrivateRoute from './Route/privateRoute';
 import Profile from './Component/Profile';
+import Error from './Component/Error';
 
 
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path:'*',
+    element:<Error></Error>
+  }
 ]);
 
 
